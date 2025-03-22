@@ -1,0 +1,19 @@
+{
+    "sqltools.connections": [
+        {
+            "pgOptions": {
+                "ssl": {
+                    "rejectUnauthorized": true
+                }
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "driver": "PostgreSQL",
+            "name": "render.com",
+            "connectString": "postgresql://emma_340_user:t1XMoGVvzXO9w5tKr6EtP7yEd5zyKdDJ@dpg-cv2vrmqn91rc73c3064g-a.oregon-postgres.render.com/emma_340"
+        }
+    ],
+    "dataworkspace.excludedProjects": [
+        "db-sql-code-sql/db-sql-code-sql.sqlproj"
+    ]
+}
