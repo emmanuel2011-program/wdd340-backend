@@ -243,3 +243,22 @@ VALUES   (
     'White',
     5
   );
+--4: Modify the "GM Hummer" record to read "a huge interior" rather than "small interiors" using a single query
+UPDATE public.inventory
+SET inv_description = REPLACE(
+        inv_description,
+        'small interiors',
+        'a huge interior'
+    )
+WHERE inv_make = 'GM'
+    AND inv_model = 'Hummer';
+
+-- 5: Use an inner join to select the make and model fields from the inventory table 
+-- and the classification name field from the classification table for inventory 
+-- items that belong to the "Sport" category
+SELECT inv_make,
+    inv_model,
+    classification_name
+FROM public.inventory
+    INNER JOIN public.classification ON public.inventory.classification_id = public.classification.classification_id
+WHERE classification_name = 'Sport';
