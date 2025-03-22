@@ -10,7 +10,7 @@
             "server": "localhost",
             "driver": "PostgreSQL",
             "name": "render.com",
-            "connectString": "postgresql://emma_340_user:t1XMoGVvzXO9w5tKr6EtP7yEd5zyKdDJ@dpg-cv2vrmqn91rc73c3064g-a.oregon-postgres.render.com/emma_340"
+            "connectString": "postgresql://emma_340_6yzy_user:iiZv2MhtkDGopUz9C3Xnp8QilcB3PKy0@dpg-cvf9vl8fnakc739lp9rg-a.oregon-postgres.render.com/emma_340_6yzy"
         }
     ],
     "dataworkspace.excludedProjects": [
