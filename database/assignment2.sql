@@ -1,6 +1,6 @@
 --inserting the following new item to my account table
 --Tony, Stark, tony@starkent.com, Iam1ronM@n.
-INSERT INTO public.account (
+INSERT INTO "public".account (
 account_firstname,
 account_lastname,
 account_email,
