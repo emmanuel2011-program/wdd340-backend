@@ -1,15 +1,8 @@
-/* *****************************************************
-*the content heading, describing the content of the view */
 <% if (title) { %>
     <h1><%= title %></h1>
     <% } else {
       res.redirect('/')
     } %>
-
-/* *****************************************************
-* the message to be displayed to the user */
 <%# messages() %>
 
-/* *****************************************************
-* the inventory item s displayed in a table */
 <%- grid %>

@@ -11,7 +11,8 @@ const env = require("dotenv").config()
 const app = express()
 const static = require("./routes/static")
 const baseController = require("./controllers/baseController")
-const inventoryRoute = require("./routes/inventoryRoute"); 
+const inventoryRoute = require("./routes/inventoryRoute");
+const intentionalErrorRoute = require("./routes/intentionalErrorRoute.js");
 const utilities = require("./utilities/index.js");
 
 /* ***********************
@@ -26,13 +27,17 @@ app.set("layout", "./layouts/layout") // not at views root
 /* ***********************
  * Routes
  *************************/
-app.use(static)
+app.use(express.static("public")) // Static files in public folder
 
 // Index route
 app.get("/", utilities.handleErrors(baseController.buildHome))
 
 // Inventory routes
 app.use("/inv", inventoryRoute)
+
+// Intentional error route. Used for testing
+app.use("/trigger-error", intentionalErrorRoute);
+
 
 // File Not Found Route - must be last route in list
 app.use(async (req, res, next) => {
@@ -67,7 +72,4 @@ app.listen(port, () => {
   console.log(`app listening on ${host}:${port}`)
 })
 
-app.use((err, req, res, next) => {
-  console.error("Unhandled Error:", err);
-  res.status(500).send("Something went wrong on the server.");
-});
+
