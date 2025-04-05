@@ -1,4 +1,3 @@
-// Needed resources
 const express = require("express");
 const router = new express.Router();
 const intentionalErrorswitch = require("../controllers/intentionalErrorswitch");
