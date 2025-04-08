@@ -19,6 +19,9 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const session = require("express-session")
 const pool = require('./database/')
+const favicon = require('serve-favicon');
+const path = require('path');
+
 
 
 
@@ -46,6 +49,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ // for parsing application/x-www-form-urlencoded
   extended: true
 }));
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
 /* ***********************
  * Vew Engine and Templates
