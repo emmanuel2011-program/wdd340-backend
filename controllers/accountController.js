@@ -53,11 +53,13 @@ async function registerAccount(req, res) {
     account_email,
     hashedPassword
   );
+  console.log("🔄 Registration result:", regResult);
 
-  if (regResult) {
+
+  if (regResult && regResult.account_id) {
     req.flash(
       "notice",
-      `Congratulations, you\'re registered ${account_firstname}. Please log in.`
+      `Congratulations, you're registered ${account_firstname}. Please log in.`
     );
     res.status(201).render("account/login", {
       title: "Login",
@@ -72,7 +74,7 @@ async function registerAccount(req, res) {
       nav,
     });
   }
-}
+} 
 
 /* ****************************************
  *  Deliver login view

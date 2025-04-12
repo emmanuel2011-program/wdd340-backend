@@ -22,9 +22,14 @@ const pool = require('./database/')
 const favicon = require('serve-favicon');
 const path = require('path');
 
-
-
-
+/* ******************************************
+ * Handle Deprecation Warnings
+ ****************************************** */
+process.on('warning', (warning) => {
+  console.warn('Deprecation Warning: ', warning.name);
+  console.warn(warning.message);
+  console.warn(warning.stack);
+});
 
 /* ***********************
  * Middleware
@@ -49,6 +54,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ // for parsing application/x-www-form-urlencoded
   extended: true
 }));
+/* unit 5, login process activity */
+app.use(cookieParser())
+
+// JWT checker
+app.use(utilities.checkJWTToken);
+
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
 /* ***********************
@@ -57,8 +68,6 @@ app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.set("view engine", "ejs")
 app.use(expressLayouts)
 app.set("layout", "./layouts/layout") // not at views root
-
-
 
 /* ***********************
  * Routes
@@ -76,7 +85,6 @@ app.use("/account", accountRoute);
 // Intentional error route. Used for testing
 app.use("/trigger-error", intentionalErrorRoute);
 
-
 // File Not Found Route - must be last route in list
 app.use(async (req, res, next) => {
   next({status: 404, message: 'Sorry, we appear to have lost that page.'})
@@ -89,6 +97,7 @@ app.use(async (req, res, next) => {
 app.use(async (err, req, res, next) => {
   let nav = await utilities.getNav()
   console.error(`Error at: "${req.originalUrl}": ${err.message}`)
+  let message;
   if(err.status == 404){ message = err.message} else {message = 'Oh no! There was a crash. Maybe try a different route?'}
   res.render("errors/error", {
     title: err.status || 'Server Error',
@@ -96,6 +105,7 @@ app.use(async (err, req, res, next) => {
     nav
   })
 })
+
 /* ***********************
  * Local Server Information
  * Values from .env (environment) file
@@ -109,5 +119,3 @@ const host = process.env.HOST
 app.listen(port, () => {
   console.log(`app listening on ${host}:${port}`)
 })
-
-
