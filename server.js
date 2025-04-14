@@ -96,7 +96,9 @@ app.use("/trigger-error", intentionalErrorRoute);
 app.use(async (req, res, next) => {
   next({status: 404, message: 'Sorry, we appear to have lost that page.'})
 })
-
+console.log("Body received in password update validator:", req.body);
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 /* ***********************
 * Express Error Handler
 * Place after all other middleware
