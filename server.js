@@ -56,6 +56,13 @@ app.use(bodyParser.urlencoded({ // for parsing application/x-www-form-urlencoded
 }));
 /* unit 5, login process activity */
 app.use(cookieParser())
+/**** ensuring that local account data is available to all */
+app.use((req, res, next) => {
+  res.locals.accountData = req.session.account || null;
+  res.locals.loggedin = req.session.loggedin || false;
+  next();
+});
+
 
 // JWT checker
 app.use(utilities.checkJWTToken);

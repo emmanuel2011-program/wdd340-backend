@@ -8,7 +8,7 @@
    </ul>
   <% } %>
 
-  <% if(locals.accountData.account_type == "Client") { %>
+  <% if(locals.accountData.account_type == "client") { %>
     <h2>Welcome <%- locals.accountData.account_firstname %></h2>
     <p><a href="/account/update/<%- locals.accountData.account_id %>">Update account information</a></p>
   <% } else if(locals.accountData.account_type == "Employee" || locals.accountData.account_type == "Admin") { %>
