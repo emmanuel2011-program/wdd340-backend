@@ -4,10 +4,14 @@ require("dotenv").config();
 
 const utilities = require("../utilities");
 const accountModel = require("../models/account-model");
+/********************************* 
+ * delivering my message model week 6*/
+const messageModel = require("../models/message-model");
+ 
 
 
 /* ****************************************
- *  Deliver registration view
+ *  Delivering  registration view for my app
  * *************************************** */
 async function buildRegister(req, res, next) {
   let nav = await utilities.getNav();
@@ -128,10 +132,18 @@ async function accountLogin(req, res) {
  * ************************************ */
 async function buildAccountManagementView(req, res) {
   let nav = await utilities.getNav();
+  const account_id = res.locals.accountData?.account_id;
+
+  let unread = 0;
+  if (account_id) {
+    unread = await messageModel.countUnreadMessages(account_id);
+  }
+
   res.render("account/account-management", {
     title: "Account Management",
     nav,
     errors: null,
+    unread,
   });
   return; 
 }

@@ -21,6 +21,8 @@ const session = require("express-session")
 const pool = require('./database/')
 const favicon = require('serve-favicon');
 const path = require('path');
+const messageRoute = require('./routes/messageRoute.js');
+
 
 /* ******************************************
  * Handle Deprecation Warnings
@@ -86,6 +88,9 @@ app.get("/", utilities.handleErrors(baseController.buildHome))
 
 // Inventory routes
 app.use("/inv", inventoryRoute)
+
+// Message routes
+app.use("/message", messageRoute);
 
 // Account routes
 app.use("/account", accountRoute);
